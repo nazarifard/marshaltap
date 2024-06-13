@@ -6,34 +6,36 @@ import (
 	"testing"
 
 	"github.com/nazarifard/marshaltap/goserbench"
-	"github.com/nazarifard/marshaltap/internal/serializers/avro"
-	"github.com/nazarifard/marshaltap/internal/serializers/baseline"
-	bebop200sc "github.com/nazarifard/marshaltap/internal/serializers/bebop_200sc"
-	bebopwellquite "github.com/nazarifard/marshaltap/internal/serializers/bebop_wellquite"
-	"github.com/nazarifard/marshaltap/internal/serializers/benc"
-	binaryalecthomas "github.com/nazarifard/marshaltap/internal/serializers/binary_alecthomas"
-	"github.com/nazarifard/marshaltap/internal/serializers/bson"
-	"github.com/nazarifard/marshaltap/internal/serializers/capnproto"
-	"github.com/nazarifard/marshaltap/internal/serializers/colfer"
-	"github.com/nazarifard/marshaltap/internal/serializers/easyjson"
-	"github.com/nazarifard/marshaltap/internal/serializers/fastape"
-	"github.com/nazarifard/marshaltap/internal/serializers/fastjson"
-	"github.com/nazarifard/marshaltap/internal/serializers/flatbuffers"
-	"github.com/nazarifard/marshaltap/internal/serializers/gencode"
-	"github.com/nazarifard/marshaltap/internal/serializers/gogo"
-	"github.com/nazarifard/marshaltap/internal/serializers/jsoniter"
-	"github.com/nazarifard/marshaltap/internal/serializers/mongobson"
+	binaryalecthomas "github.com/nazarifard/marshaltap/tap/binary_alecthomas"
+	"github.com/nazarifard/marshaltap/tap/bson"
+	"github.com/nazarifard/marshaltap/tap/mongobson"
+	"github.com/nazarifard/marshaltap/tap/samples/avro"
+	"github.com/nazarifard/marshaltap/tap/samples/baseline"
+	bebop200sc "github.com/nazarifard/marshaltap/tap/samples/bebop_200sc"
+	bebopwellquite "github.com/nazarifard/marshaltap/tap/samples/bebop_wellquite"
+	"github.com/nazarifard/marshaltap/tap/samples/benc"
+	"github.com/nazarifard/marshaltap/tap/samples/capnproto"
+	"github.com/nazarifard/marshaltap/tap/samples/colfer"
+	"github.com/nazarifard/marshaltap/tap/samples/easyjson"
+	"github.com/nazarifard/marshaltap/tap/samples/fastape"
+	"github.com/nazarifard/marshaltap/tap/samples/fastjson"
+	"github.com/nazarifard/marshaltap/tap/samples/flatbuffers"
+	"github.com/nazarifard/marshaltap/tap/samples/gencode"
+	"github.com/nazarifard/marshaltap/tap/samples/gogo"
+	"github.com/nazarifard/marshaltap/tap/samples/jsoniter"
 
-	//"github.com/nazarifard/marshaltap/internal/serializers/gotiny"
-	"github.com/nazarifard/marshaltap/internal/serializers/hprose"
-	"github.com/nazarifard/marshaltap/internal/serializers/hprose2"
-	"github.com/nazarifard/marshaltap/internal/serializers/ikea"
-	msgpacktinylib "github.com/nazarifard/marshaltap/internal/serializers/msgpack_tinylib"
-	"github.com/nazarifard/marshaltap/internal/serializers/mus"
-	"github.com/nazarifard/marshaltap/internal/serializers/ssz"
-	"github.com/nazarifard/marshaltap/internal/serializers/stdlib"
-	xdrcalmh "github.com/nazarifard/marshaltap/internal/serializers/xdr_calmh"
+	//"github.com/nazarifard/marshaltap/tap/samples/gotiny"
+	"github.com/nazarifard/marshaltap/tap/samples/hprose"
+	"github.com/nazarifard/marshaltap/tap/samples/hprose2"
+	"github.com/nazarifard/marshaltap/tap/samples/ikea"
+	msgpacktinylib "github.com/nazarifard/marshaltap/tap/samples/msgpack_tinylib"
+	"github.com/nazarifard/marshaltap/tap/samples/mus"
+	"github.com/nazarifard/marshaltap/tap/samples/ssz"
+	"github.com/nazarifard/marshaltap/tap/stdlib/gob"
+	"github.com/nazarifard/marshaltap/tap/stdlib/json"
+
 	"github.com/nazarifard/marshaltap/tap"
+	xdrcalmh "github.com/nazarifard/marshaltap/tap/samples/xdr_calmh"
 )
 
 var (
@@ -71,7 +73,7 @@ var benchmarkCases = []BenchmarkCase{
 	}, {
 		Name: "json",
 		URL:  "pkg.go/dev/encoding/json",
-		New:  stdlib.NewJsonTap[goserbench.SmallStruct],
+		New:  json.NewJsonTap[goserbench.SmallStruct],
 	}, {
 		Name: "jsoniter",
 		URL:  "github.com/json-iterator/go",
@@ -91,7 +93,7 @@ var benchmarkCases = []BenchmarkCase{
 	}, {
 		Name: "gob",
 		URL:  "pkg.go.dev/encoding/gob",
-		New:  stdlib.NewGobTap[goserbench.SmallStruct],
+		New:  gob.NewGobTap[goserbench.SmallStruct],
 		// }, {
 		// 	Name: "davecgh/xdr",
 		// 	URL:  "github.com/davecgh/go-xdr/xdr",

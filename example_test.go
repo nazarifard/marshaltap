@@ -4,8 +4,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/nazarifard/marshaltap/internal/serializers/fastape"
 	"github.com/nazarifard/marshaltap/tap"
+	"github.com/nazarifard/marshaltap/tap/samples/fastape"
 	"github.com/nazarifard/syncpool"
 	"github.com/stretchr/testify/assert"
 )

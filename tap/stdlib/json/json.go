@@ -1,4 +1,4 @@
-package stdlib
+package json
 
 import (
 	"encoding/json"
