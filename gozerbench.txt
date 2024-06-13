@@ -1,0 +1,3 @@
+
+ Base of this project is derived from https://github.com/alecthomas/go_serialization_benchmarks
+ However MarshalTap is not a benchmark tool. its a go module that can be used with other serializers.
