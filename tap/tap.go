@@ -9,7 +9,7 @@ type Encoder[V any] interface {
 	Encode(V) (pool.Buffer, error)
 }
 type Decoder[V any] interface {
-	Decode(pb pool.Buffer) (V, error)
+	Decode(bs []byte) (V, error)
 }
 type TapInterface[V any] interface {
 	Encoder[V]
@@ -28,8 +28,8 @@ func (t *Tap[V, M]) Encode(v V) (buf pool.Buffer, err error) {
 	err = t.Modem.Marshal(v, buf.Bytes())
 	return
 }
-func (t *Tap[V, M]) Decode(buf pool.Buffer) (v V, err error) {
-	err = t.Modem.Unmarshal(buf.Bytes(), &v)
+func (t *Tap[V, M]) Decode(bs []byte) (v V, err error) {
+	err = t.Modem.Unmarshal(bs, &v)
 	return
 }
 

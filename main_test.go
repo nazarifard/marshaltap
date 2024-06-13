@@ -236,7 +236,7 @@ var benchmarkCases = []BenchmarkCase{
 }
 
 func BenchmarkSerializers(b *testing.B) {
-	for i := range benchmarkCases[:2] {
+	for i := range benchmarkCases {
 		bc := benchmarkCases[i]
 		b.Run("marshal/"+bc.Name, func(b *testing.B) {
 			goserbench.BenchMarshalSmallStruct(b, bc.New())

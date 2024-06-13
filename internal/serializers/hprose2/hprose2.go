@@ -33,14 +33,14 @@ func (s *Hprose2Serializer) Encode(v goserbench.SmallStruct) (pool.Buffer, error
 	return zb, err
 }
 
-func (s *Hprose2Serializer) Decode(buffer pool.Buffer) (v goserbench.SmallStruct, err error) {
+func (s *Hprose2Serializer) Decode(bs []byte) (v goserbench.SmallStruct, err error) {
 	o := &v
 	//r:=hprose2.NewByteReader(buffer.Bytes())
 	reader := hprose2.Reader{
 		Simple:    true,
-		RawReader: *hprose2.NewRawReader(buffer.Bytes()),
+		RawReader: *hprose2.NewRawReader(bs),
 	}
-	reader.Init(buffer.Bytes())
+	reader.Init(bs)
 	o.Name = reader.ReadString()
 	o.BirthDay = reader.ReadTime()
 	o.Phone = reader.ReadString()

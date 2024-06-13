@@ -23,7 +23,7 @@ func TestTape(t *testing.T) {
 	sTap := tap.NewTap[S, MS](sModem)
 	buff, err := sTap.Encode(s)
 	//assert.Error(t, err, "tape.Encoder failed")
-	s2, err := sTap.Decode(buff)
+	s2, err := sTap.Decode(buff.Bytes())
 	//assert.Error(t, err, "tape.Decoder failed")
 	buff.Free()
 	assert.Equal(t, s.Money, s2.Money)

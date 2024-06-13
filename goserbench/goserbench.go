@@ -121,7 +121,7 @@ func BenchUnmarshalSmallStruct(b *testing.B, s tap.TapInterface[SmallStruct], va
 
 	for i := 0; i < b.N; i++ {
 		n := rand.Intn(len(ser))
-		v, err := s.Decode(ser[n])
+		v, err := s.Decode(ser[n].Bytes())
 		if err != nil {
 			b.Fatalf("unmarshal error %s for %#x / %q", err, ser[n], ser[n])
 		}

@@ -46,9 +46,9 @@ func (m *EasyJSONSerializer) Encode(v goserbench.SmallStruct) (syncpool.Buffer, 
 	return zb2, err
 }
 
-func (m *EasyJSONSerializer) Decode(zb syncpool.Buffer) (v goserbench.SmallStruct, err error) {
+func (m *EasyJSONSerializer) Decode(bs []byte) (v goserbench.SmallStruct, err error) {
 	a := &m.a
-	err = easyjson.Unmarshal(zb.Bytes(), a)
+	err = easyjson.Unmarshal(bs, a)
 	if err != nil {
 		return
 	}

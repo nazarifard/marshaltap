@@ -1,6 +1,7 @@
 package ikea
 
 import (
+	"bytes"
 	"math"
 	"time"
 
@@ -40,9 +41,9 @@ func (s *IkeaSerializer) Encode(v goserbench.SmallStruct) (zb syncpool.Buffer, e
 	return
 }
 
-func (s *IkeaSerializer) Decode(zb syncpool.Buffer) (v goserbench.SmallStruct, err error) {
+func (s *IkeaSerializer) Decode(bs []byte) (v goserbench.SmallStruct, err error) {
 	a := &s.a
-	err = ikea.Unpack((*syncpool.RBuffer)(zb), a)
+	err = ikea.Unpack(bytes.NewReader(bs), a)
 	if err != nil {
 		return
 	}

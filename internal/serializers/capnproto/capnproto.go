@@ -29,8 +29,8 @@ func (x *CapNProtoSerializer) Encode(v goserbench.SmallStruct) (syncpool.Buffer,
 	return zb, err
 }
 
-func (x *CapNProtoSerializer) Decode(buffer syncpool.Buffer) (v goserbench.SmallStruct, err error) {
-	s, _, err := capn.ReadFromMemoryZeroCopy(buffer.Bytes())
+func (x *CapNProtoSerializer) Decode(bs []byte) (v goserbench.SmallStruct, err error) {
+	s, _, err := capn.ReadFromMemoryZeroCopy(bs)
 	if err != nil {
 		return
 	}

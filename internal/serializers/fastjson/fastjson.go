@@ -38,8 +38,8 @@ func (s *FastJSONSerializer) Encode(v goserbench.SmallStruct) (buf syncpool.Buff
 	return zb, err
 }
 
-func (s *FastJSONSerializer) Decode(buffer syncpool.Buffer) (v goserbench.SmallStruct, err error) {
-	val, err := fastjson.ParseBytes(buffer.Bytes())
+func (s *FastJSONSerializer) Decode(bs []byte) (v goserbench.SmallStruct, err error) {
+	val, err := fastjson.ParseBytes(bs)
 	if err != nil {
 		return
 	}

@@ -22,8 +22,8 @@ func (m *BinaryTap[V]) Encode(v V) (pool.Buffer, error) {
 	return zb, err
 }
 
-func (m *BinaryTap[V]) Decode(buf pool.Buffer) (v V, err error) {
-	b2 := bytes.NewBuffer(buf.Bytes())
+func (m *BinaryTap[V]) Decode(bs []byte) (v V, err error) {
+	b2 := bytes.NewBuffer(bs)
 	err = binary.NewDecoder(b2).Decode(&v)
 	return
 }

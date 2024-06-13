@@ -1,6 +1,7 @@
 package gogo
 
 import (
+	"bytes"
 	"time"
 
 	"github.com/gogo/protobuf/jsonpb"
@@ -17,7 +18,7 @@ type GogoProtoSerializer struct {
 	// marshaller and unmarshaller are set on creation to either binary
 	// or json marshallers.
 	marshaller   func(proto.Message) (syncpool.Buffer, error)
-	unmarshaller func(syncpool.Buffer, proto.Message) error
+	unmarshaller func([]byte, proto.Message) error
 }
 
 func (s *GogoProtoSerializer) Encode(v goserbench.SmallStruct) (buf syncpool.Buffer, err error) {
@@ -31,13 +32,13 @@ func (s *GogoProtoSerializer) Encode(v goserbench.SmallStruct) (buf syncpool.Buf
 	return s.marshaller(a)
 }
 
-func (s *GogoProtoSerializer) Decode(buf syncpool.Buffer) (v goserbench.SmallStruct, err error) {
+func (s *GogoProtoSerializer) Decode(bs []byte) (v goserbench.SmallStruct, err error) {
 	// NOTE: gogoproto serialization in jsonpb mode does not automatically
 	// clear fields with their empty value.
 	a := &s.a
 	*a = GogoProtoBufA{}
 
-	err = s.unmarshaller(buf, a)
+	err = s.unmarshaller(bs, a)
 	if err != nil {
 		return
 	}
@@ -69,8 +70,8 @@ func NewJSonTap() tap.TapInterface[goserbench.SmallStruct] {
 			err := marshaller.Marshal(buf, a)
 			return buf, err
 		},
-		unmarshaller: func(b syncpool.Buffer, a proto.Message) (err error) {
-			err = jsonpb.Unmarshal((*syncpool.RBuffer)(b), a)
+		unmarshaller: func(bs []byte, a proto.Message) (err error) {
+			err = jsonpb.Unmarshal(bytes.NewReader(bs), a)
 			return err
 		},
 	}

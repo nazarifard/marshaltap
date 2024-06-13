@@ -28,8 +28,8 @@ func (m *BsonTap[V]) Encode(v V) (buf pool.Buffer, err error) {
 	return
 }
 
-func (m *BsonTap[V]) Decode(buf pool.Buffer) (v V, err error) {
-	decoder, err := bson.NewDecoder(bsonrw.NewBSONDocumentReader(buf.Bytes()))
+func (m *BsonTap[V]) Decode(bs []byte) (v V, err error) {
+	decoder, err := bson.NewDecoder(bsonrw.NewBSONDocumentReader(bs))
 	if err != nil {
 		return
 	}

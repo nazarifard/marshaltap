@@ -37,9 +37,9 @@ func (s *FlatBufferSerializer) Encode(v goserbench.SmallStruct) (buffer syncpool
 	return
 }
 
-func (s *FlatBufferSerializer) Decode(zb syncpool.Buffer) (v goserbench.SmallStruct, err error) {
+func (s *FlatBufferSerializer) Decode(bs []byte) (v goserbench.SmallStruct, err error) {
 	o := FlatBufferA{}
-	o.Init(zb.Bytes(), flatbuffers.GetUOffsetT(zb.Bytes()))
+	o.Init(bs, flatbuffers.GetUOffsetT(bs))
 	v.Name = string(o.Name())
 	v.BirthDay = time.Unix(0, o.BirthDay())
 	v.Phone = string(o.Phone())

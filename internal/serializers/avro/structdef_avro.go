@@ -77,9 +77,8 @@ func (a *AvroA[V]) Encode(v goserbench.SmallStruct) (pool.Buffer, error) {
 	return zb, err
 }
 
-func (a *AvroA[V]) Decode(buf pool.Buffer) (v goserbench.SmallStruct, err error) {
-	d := bytes.NewBuffer(buf.Bytes())
-	i, err := a.codec.Decode(d) //(*pool.RBuffer)(buf))
+func (a *AvroA[V]) Decode(bs []byte) (v goserbench.SmallStruct, err error) {
+	i, err := a.codec.Decode(bytes.NewReader(bs)) //(*pool.RBuffer)(buf))
 	if err != nil {
 		return
 	}

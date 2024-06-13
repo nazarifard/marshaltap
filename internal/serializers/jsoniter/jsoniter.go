@@ -1,6 +1,8 @@
 package jsoniter
 
 import (
+	"bytes"
+
 	jsoniter "github.com/json-iterator/go"
 	"github.com/nazarifard/marshaltap/goserbench"
 	"github.com/nazarifard/marshaltap/tap"
@@ -25,8 +27,8 @@ func (m *JsonIterSerializer[V]) Encode(v V) (syncpool.Buffer, error) {
 	return zb, err
 }
 
-func (m *JsonIterSerializer[V]) Decode(buf syncpool.Buffer) (v V, err error) {
-	err = jsoniter.NewDecoder((*syncpool.RBuffer)(buf)).Decode(&v)
+func (m *JsonIterSerializer[V]) Decode(bs []byte) (v V, err error) {
+	err = jsoniter.NewDecoder(bytes.NewReader(bs)).Decode(&v)
 	return
 }
 

@@ -105,9 +105,11 @@ Also some of other results show how MarshalTap can reduce memory allocations eve
  func main() {
  	s:="hello"
  	stap:=tap.NewTap[S, *SModem](s)	
- 	buf, _ := stap.Encode(s) //get buf
- 	s2,_ := stap.Decode(buf) //use buf
- 	buf.Free()               //free buf	
+
+ 	buf, _ := stap.Encode(s)         //get buf
+ 	s2,_ := stap.Decode(buf.Bytes()) //use buf
+ 	buf.Free()                       //free buf	
+	
  	print(s2)
  }
 ```
