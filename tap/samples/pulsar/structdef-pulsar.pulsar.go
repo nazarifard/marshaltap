@@ -832,11 +832,11 @@ func file_structdef_pulsar_proto_init() {
 		file_structdef_pulsar_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*PulsarBufA); i {
 			case 0:
-				return &v.state
+				return v.state
 			case 1:
-				return &v.sizeCache
+				return v.sizeCache
 			case 2:
-				return &v.unknownFields
+				return v.unknownFields
 			default:
 				return nil
 			}

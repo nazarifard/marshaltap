@@ -18,13 +18,13 @@ type BebopBufWellquite struct {
 }
 
 // EncodeBebop writes the value to the writer, serialized as Bebop.
-func (self *BebopBufWellquite) EncodeBebop(writer io.Writer) error {
+func (self BebopBufWellquite) EncodeBebop(writer io.Writer) error {
 	return self.BebopEncodeEncoder(runtime.NewEncoder(writer))
 }
 
 // DecodeBebop attempts to read Bebop from the reader and to
 // deserialize it into the value.
-func (self *BebopBufWellquite) DecodeBebop(reader io.Reader) error {
+func (self BebopBufWellquite) DecodeBebop(reader io.Reader) error {
 	_, err := self.BebopDecodeDecoder(runtime.NewDecoder(reader))
 	return err
 }
@@ -58,7 +58,7 @@ func (self *BebopBufWellquite) SizeBebop() int {
 
 // Not intended for public use. This method is public only so that
 // other Bebop-generated code in different packages can call it.
-func (self *BebopBufWellquite) BebopEncodeEncoder(encoder *runtime.Encoder) (err error) {
+func (self BebopBufWellquite) BebopEncodeEncoder(encoder *runtime.Encoder) (err error) {
 	err = encoder.EncodeString(self.Name)
 	if err != nil {
 		return err
@@ -120,7 +120,7 @@ func (self *BebopBufWellquite) BebopMarshalAt(buf []byte, offset int) (nextOffse
 
 // Not intended for public use. This method is public only so that
 // other Bebop-generated code in different packages can call it.
-func (self *BebopBufWellquite) BebopDecodeDecoder(decoder *runtime.Decoder) (n int, err error) {
+func (self BebopBufWellquite) BebopDecodeDecoder(decoder *runtime.Decoder) (n int, err error) {
 	{
 		value, m, err := decoder.DecodeString()
 		n += m

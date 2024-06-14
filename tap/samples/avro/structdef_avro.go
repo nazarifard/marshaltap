@@ -60,10 +60,10 @@ func NewAvroATap() tap.Interface[goserbench.SmallStruct] {
 	if err != nil {
 		panic(err)
 	}
-	return &AvroA[goserbench.SmallStruct]{record: rec, codec: codec, bufferPool: pool.NewBufferPool()}
+	return AvroA[goserbench.SmallStruct]{record: rec, codec: codec, bufferPool: pool.NewBufferPool()}
 }
 
-func (a *AvroA[V]) Encode(v goserbench.SmallStruct) (pool.Buffer, error) {
+func (a AvroA[V]) Encode(v goserbench.SmallStruct) (pool.Buffer, error) {
 	a.record.Set("name", v.Name)
 	a.record.Set("birthday", int64(v.BirthDay.UnixNano()))
 	a.record.Set("phone", v.Phone)
@@ -77,7 +77,7 @@ func (a *AvroA[V]) Encode(v goserbench.SmallStruct) (pool.Buffer, error) {
 	return zb, err
 }
 
-func (a *AvroA[V]) Decode(bs []byte) (v goserbench.SmallStruct, n int, err error) {
+func (a AvroA[V]) Decode(bs []byte) (v goserbench.SmallStruct, n int, err error) {
 	i, err := a.codec.Decode(bytes.NewReader(bs)) //(*pool.RBuffer)(buf))
 	if err != nil {
 		return

@@ -26,7 +26,7 @@ type IkeaSerializer struct {
 	bufferPool syncpool.BufferPool
 }
 
-func (s *IkeaSerializer) Encode(v goserbench.SmallStruct) (zb syncpool.Buffer, err error) {
+func (s IkeaSerializer) Encode(v goserbench.SmallStruct) (zb syncpool.Buffer, err error) {
 	a := &s.a
 	a.Name = v.Name
 	a.BirthDay = v.BirthDay.UnixNano()
@@ -41,7 +41,7 @@ func (s *IkeaSerializer) Encode(v goserbench.SmallStruct) (zb syncpool.Buffer, e
 	return
 }
 
-func (s *IkeaSerializer) Decode(bs []byte) (v goserbench.SmallStruct, n int, err error) {
+func (s IkeaSerializer) Decode(bs []byte) (v goserbench.SmallStruct, n int, err error) {
 	a := &s.a
 	err = ikea.Unpack(bytes.NewReader(bs), a)
 	if err != nil {
@@ -58,7 +58,7 @@ func (s *IkeaSerializer) Decode(bs []byte) (v goserbench.SmallStruct, n int, err
 }
 
 func NewTap() tap.Interface[goserbench.SmallStruct] {
-	return &IkeaSerializer{
+	return IkeaSerializer{
 		bufferPool: syncpool.NewBufferPool(),
 	}
 }

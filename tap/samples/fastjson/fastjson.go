@@ -16,7 +16,7 @@ type FastJSONSerializer struct {
 	//buf    []byte
 }
 
-func (s *FastJSONSerializer) Encode(v goserbench.SmallStruct) (buf syncpool.Buffer, err error) {
+func (s FastJSONSerializer) Encode(v goserbench.SmallStruct) (buf syncpool.Buffer, err error) {
 	object, arena := s.object, s.arena
 	object.Set("name", arena.NewString(v.Name))
 	object.Set("birthday", arena.NewNumberInt(int(v.BirthDay.UnixNano())))
@@ -38,7 +38,7 @@ func (s *FastJSONSerializer) Encode(v goserbench.SmallStruct) (buf syncpool.Buff
 	return zb, err
 }
 
-func (s *FastJSONSerializer) Decode(bs []byte) (v goserbench.SmallStruct, n int, err error) {
+func (s FastJSONSerializer) Decode(bs []byte) (v goserbench.SmallStruct, n int, err error) {
 	val, err := fastjson.ParseBytes(bs)
 	if err != nil {
 		return
@@ -54,7 +54,7 @@ func (s *FastJSONSerializer) Decode(bs []byte) (v goserbench.SmallStruct, n int,
 
 func NewTap() tap.Interface[goserbench.SmallStruct] {
 	var arena fastjson.Arena
-	return &FastJSONSerializer{
+	return FastJSONSerializer{
 		object:     arena.NewObject(),
 		arena:      arena,
 		bufferPool: syncpool.NewBufferPool(),

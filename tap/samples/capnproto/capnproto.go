@@ -13,7 +13,7 @@ type CapNProtoSerializer struct {
 	bufferPool syncpool.BufferPool
 }
 
-func (x *CapNProtoSerializer) Encode(v goserbench.SmallStruct) (syncpool.Buffer, error) {
+func (x CapNProtoSerializer) Encode(v goserbench.SmallStruct) (syncpool.Buffer, error) {
 	seg := capn.NewBuffer(nil)
 	c := NewRootCapnpA(seg)
 	c.SetName(v.Name)
@@ -29,7 +29,7 @@ func (x *CapNProtoSerializer) Encode(v goserbench.SmallStruct) (syncpool.Buffer,
 	return zb, err
 }
 
-func (x *CapNProtoSerializer) Decode(bs []byte) (v goserbench.SmallStruct, n int, err error) {
+func (x CapNProtoSerializer) Decode(bs []byte) (v goserbench.SmallStruct, n int, err error) {
 	s, _, err := capn.ReadFromMemoryZeroCopy(bs)
 	if err != nil {
 		return
@@ -45,7 +45,7 @@ func (x *CapNProtoSerializer) Decode(bs []byte) (v goserbench.SmallStruct, n int
 }
 
 func NewTap() tap.Interface[goserbench.SmallStruct] {
-	return &CapNProtoSerializer{
+	return CapNProtoSerializer{
 		bufferPool: syncpool.NewBufferPool(),
 	}
 }

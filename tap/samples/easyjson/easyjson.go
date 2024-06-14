@@ -14,7 +14,7 @@ type EasyJSONSerializer struct {
 	a          A
 }
 
-func (m *EasyJSONSerializer) Encode(v goserbench.SmallStruct) (syncpool.Buffer, error) {
+func (m EasyJSONSerializer) Encode(v goserbench.SmallStruct) (syncpool.Buffer, error) {
 	a := &m.a
 	a.Name = v.Name
 	a.BirthDay = v.BirthDay
@@ -46,7 +46,7 @@ func (m *EasyJSONSerializer) Encode(v goserbench.SmallStruct) (syncpool.Buffer, 
 	return zb2, err
 }
 
-func (m *EasyJSONSerializer) Decode(bs []byte) (v goserbench.SmallStruct, n int, err error) {
+func (m EasyJSONSerializer) Decode(bs []byte) (v goserbench.SmallStruct, n int, err error) {
 	a := &m.a
 	err = easyjson.Unmarshal(bs, a)
 	if err != nil {
@@ -63,7 +63,7 @@ func (m *EasyJSONSerializer) Decode(bs []byte) (v goserbench.SmallStruct, n int,
 }
 
 func NewTap() tap.Interface[goserbench.SmallStruct] {
-	return &EasyJSONSerializer{
+	return EasyJSONSerializer{
 		bufferPool: syncpool.NewBufferPool(),
 	}
 }

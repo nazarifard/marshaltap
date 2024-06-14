@@ -21,7 +21,7 @@ type GencodeA struct {
 	Money    float64
 }
 
-func (d *GencodeA) Size() (s uint64) {
+func (d GencodeA) Size() (s uint64) {
 
 	{
 		l := uint64(len(d.Name))
@@ -70,7 +70,7 @@ func (d *GencodeA) Size() (s uint64) {
 	s += 24
 	return
 }
-func (d *GencodeA) Marshal(buf []byte) ([]byte, error) {
+func (d GencodeA) Marshal(buf []byte) ([]byte, error) {
 	size := d.Size()
 	{
 		if uint64(cap(buf)) >= size {
@@ -175,7 +175,7 @@ func (d *GencodeA) Marshal(buf []byte) ([]byte, error) {
 	return buf[:i+24], nil
 }
 
-func (d *GencodeA) Unmarshal(buf []byte) (uint64, error) {
+func (d GencodeA) Unmarshal(buf []byte) (uint64, error) {
 	i := uint64(0)
 
 	{

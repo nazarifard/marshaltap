@@ -14,7 +14,7 @@ type FlatBufferSerializer struct {
 	bufferPool syncpool.BufferPool
 }
 
-func (s *FlatBufferSerializer) Encode(v goserbench.SmallStruct) (buffer syncpool.Buffer, err error) {
+func (s FlatBufferSerializer) Encode(v goserbench.SmallStruct) (buffer syncpool.Buffer, err error) {
 	buffer = s.bufferPool.Get(0)
 	buffer.Reset()
 
@@ -37,7 +37,7 @@ func (s *FlatBufferSerializer) Encode(v goserbench.SmallStruct) (buffer syncpool
 	return
 }
 
-func (s *FlatBufferSerializer) Decode(bs []byte) (v goserbench.SmallStruct, n int, err error) {
+func (s FlatBufferSerializer) Decode(bs []byte) (v goserbench.SmallStruct, n int, err error) {
 	o := FlatBufferA{}
 	o.Init(bs, flatbuffers.GetUOffsetT(bs))
 	v.Name = string(o.Name())
@@ -50,7 +50,7 @@ func (s *FlatBufferSerializer) Decode(bs []byte) (v goserbench.SmallStruct, n in
 }
 
 func NewTap() tap.Interface[goserbench.SmallStruct] {
-	return &FlatBufferSerializer{
+	return FlatBufferSerializer{
 		builder:    flatbuffers.NewBuilder(0),
 		bufferPool: syncpool.NewBufferPool(),
 	}

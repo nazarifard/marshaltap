@@ -12,7 +12,7 @@ type BsonTap[V any] struct {
 	bufferPool pool.BufferPool
 }
 
-func (m *BsonTap[V]) Encode(v V) (buf pool.Buffer, err error) {
+func (m BsonTap[V]) Encode(v V) (buf pool.Buffer, err error) {
 	buf = m.bufferPool.Get(0)
 	buf.Reset()
 	vw, err := bsonrw.NewBSONValueWriter(buf)
@@ -28,7 +28,7 @@ func (m *BsonTap[V]) Encode(v V) (buf pool.Buffer, err error) {
 	return
 }
 
-func (m *BsonTap[V]) Decode(bs []byte) (v V, n int, err error) {
+func (m BsonTap[V]) Decode(bs []byte) (v V, n int, err error) {
 	decoder, err := bson.NewDecoder(bsonrw.NewBSONDocumentReader(bs))
 	if err != nil {
 		return
@@ -38,7 +38,7 @@ func (m *BsonTap[V]) Decode(bs []byte) (v V, n int, err error) {
 }
 
 func NewTap() tap.Interface[goserbench.SmallStruct] {
-	return &BsonTap[goserbench.SmallStruct]{
+	return BsonTap[goserbench.SmallStruct]{
 		bufferPool: pool.NewBufferPool(),
 	}
 }

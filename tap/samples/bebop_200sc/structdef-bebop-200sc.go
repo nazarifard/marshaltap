@@ -79,7 +79,7 @@ func (bbp *BebopBuf200sc) UnmarshalBebop(buf []byte) (err error) {
 	return nil
 }
 
-func (bbp *BebopBuf200sc) EncodeBebop(iow io.Writer) (err error) {
+func (bbp BebopBuf200sc) EncodeBebop(iow io.Writer) (err error) {
 	w := iohelp.NewErrorWriter(iow)
 	iohelp.WriteUint32(w, uint32(len(bbp.Name)))
 	w.Write([]byte(bbp.Name))
@@ -96,7 +96,7 @@ func (bbp *BebopBuf200sc) EncodeBebop(iow io.Writer) (err error) {
 	return w.Err
 }
 
-func (bbp *BebopBuf200sc) DecodeBebop(ior io.Reader) (err error) {
+func (bbp BebopBuf200sc) DecodeBebop(ior io.Reader) (err error) {
 	r := iohelp.NewErrorReader(ior)
 	bbp.Name = iohelp.ReadString(r)
 	bbp.BirthDay = iohelp.ReadDate(r)

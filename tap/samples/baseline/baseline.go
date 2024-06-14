@@ -38,7 +38,7 @@ func getBool(b []byte) bool {
 	}
 }
 
-func (b *BaselineModem[V]) Marshal(a goserbench.SmallStruct, buf []byte) error {
+func (b BaselineModem[V]) Marshal(a goserbench.SmallStruct, buf []byte) error {
 	//buf := b.b[:0]
 	buf = binary.LittleEndian.AppendUint64(buf, uint64(a.BirthDay.UnixNano()))
 	buf = binary.LittleEndian.AppendUint64(buf, math.Float64bits(a.Money))

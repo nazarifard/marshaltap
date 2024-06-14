@@ -21,7 +21,7 @@ type GogoProtoSerializer struct {
 	unmarshaller func([]byte, proto.Message) error
 }
 
-func (s *GogoProtoSerializer) Encode(v goserbench.SmallStruct) (buf syncpool.Buffer, err error) {
+func (s GogoProtoSerializer) Encode(v goserbench.SmallStruct) (buf syncpool.Buffer, err error) {
 	a := &s.a
 	a.Name = v.Name
 	a.BirthDay = v.BirthDay.UnixNano()
@@ -32,7 +32,7 @@ func (s *GogoProtoSerializer) Encode(v goserbench.SmallStruct) (buf syncpool.Buf
 	return s.marshaller(a)
 }
 
-func (s *GogoProtoSerializer) Decode(bs []byte) (v goserbench.SmallStruct, n int, err error) {
+func (s GogoProtoSerializer) Decode(bs []byte) (v goserbench.SmallStruct, n int, err error) {
 	// NOTE: gogoproto serialization in jsonpb mode does not automatically
 	// clear fields with their empty value.
 	a := &s.a
@@ -53,7 +53,7 @@ func (s *GogoProtoSerializer) Decode(bs []byte) (v goserbench.SmallStruct, n int
 }
 
 // func NewProtoModem() modem.ModemInterface[goserbench.SmallStruct] {
-// 	return &GogoProtoSerializer{
+// 	return GogoProtoSerializer{
 // 		marshaller:   proto.Marshal,
 // 		unmarshaller: proto.Unmarshal,
 // 	}
@@ -75,5 +75,5 @@ func NewJSonTap() tap.Interface[goserbench.SmallStruct] {
 			return err
 		},
 	}
-	return &x
+	return x
 }

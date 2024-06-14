@@ -13,7 +13,7 @@ type Hprose2Serializer struct {
 	//reader *hprose2.Reader
 }
 
-func (s *Hprose2Serializer) Encode(v goserbench.SmallStruct) (pool.Buffer, error) {
+func (s Hprose2Serializer) Encode(v goserbench.SmallStruct) (pool.Buffer, error) {
 	zb := s.bufferPool.Get(0)
 	zb.Reset()
 
@@ -33,7 +33,7 @@ func (s *Hprose2Serializer) Encode(v goserbench.SmallStruct) (pool.Buffer, error
 	return zb, err
 }
 
-func (s *Hprose2Serializer) Decode(bs []byte) (v goserbench.SmallStruct, n int, err error) {
+func (s Hprose2Serializer) Decode(bs []byte) (v goserbench.SmallStruct, n int, err error) {
 	o := &v
 	//r:=hprose2.NewByteReader(buffer.Bytes())
 	reader := hprose2.Reader{
@@ -51,7 +51,7 @@ func (s *Hprose2Serializer) Decode(bs []byte) (v goserbench.SmallStruct, n int, 
 }
 
 func NewTap() tap.Interface[goserbench.SmallStruct] {
-	return &Hprose2Serializer{
+	return Hprose2Serializer{
 		bufferPool: pool.NewBufferPool(),
 	}
 }

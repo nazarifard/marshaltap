@@ -59,5 +59,5 @@ package pulsar
 // }
 
 // func NewModem() modem.ModemInterface[goserbench.SmallStruct] {
-// 	return &PulsarSerializer{}
+// 	return PulsarSerializer{}
 // }
