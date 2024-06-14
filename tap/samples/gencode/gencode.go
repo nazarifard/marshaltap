@@ -52,10 +52,10 @@ func (s *GencodeSerializer) Sizeof(v goserbench.SmallStruct) int {
 	return int(s.a.Size())
 }
 
-func NewModem() modem.ModemInterface[goserbench.SmallStruct] {
+func NewModem() modem.Interface[goserbench.SmallStruct] {
 	return &GencodeSerializer{}
 }
-func NewTap() tap.TapInterface[goserbench.SmallStruct] {
+func NewTap() tap.Interface[goserbench.SmallStruct] {
 	modem := NewModem()
 	return tap.NewTap[goserbench.SmallStruct, *GencodeSerializer](modem)
 }
@@ -103,10 +103,10 @@ func (s *GencodeUnsafeSerializer) Sizeof(v goserbench.SmallStruct) int {
 	return int(s.a.Size())
 }
 
-func NewUnsafeModem() modem.ModemInterface[goserbench.SmallStruct] {
+func NewUnsafeModem() modem.Interface[goserbench.SmallStruct] {
 	return &GencodeUnsafeSerializer{}
 }
-func NewTapUnsafe() tap.TapInterface[goserbench.SmallStruct] {
+func NewTapUnsafe() tap.Interface[goserbench.SmallStruct] {
 	modem := NewUnsafeModem()
 	return tap.NewTap[goserbench.SmallStruct, *GencodeUnsafeSerializer](modem)
 }

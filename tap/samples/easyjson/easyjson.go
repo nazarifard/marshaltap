@@ -46,7 +46,7 @@ func (m *EasyJSONSerializer) Encode(v goserbench.SmallStruct) (syncpool.Buffer, 
 	return zb2, err
 }
 
-func (m *EasyJSONSerializer) Decode(bs []byte) (v goserbench.SmallStruct, err error) {
+func (m *EasyJSONSerializer) Decode(bs []byte) (v goserbench.SmallStruct, n int, err error) {
 	a := &m.a
 	err = easyjson.Unmarshal(bs, a)
 	if err != nil {
@@ -59,10 +59,10 @@ func (m *EasyJSONSerializer) Decode(bs []byte) (v goserbench.SmallStruct, err er
 	v.Siblings = int(a.Siblings)
 	v.Spouse = a.Spouse
 	v.Money = a.Money
-	return
+	return v, 0, err //TODO
 }
 
-func NewTap() tap.TapInterface[goserbench.SmallStruct] {
+func NewTap() tap.Interface[goserbench.SmallStruct] {
 	return &EasyJSONSerializer{
 		bufferPool: syncpool.NewBufferPool(),
 	}

@@ -32,7 +32,7 @@ func (s *GogoProtoSerializer) Encode(v goserbench.SmallStruct) (buf syncpool.Buf
 	return s.marshaller(a)
 }
 
-func (s *GogoProtoSerializer) Decode(bs []byte) (v goserbench.SmallStruct, err error) {
+func (s *GogoProtoSerializer) Decode(bs []byte) (v goserbench.SmallStruct, n int, err error) {
 	// NOTE: gogoproto serialization in jsonpb mode does not automatically
 	// clear fields with their empty value.
 	a := &s.a
@@ -49,7 +49,7 @@ func (s *GogoProtoSerializer) Decode(bs []byte) (v goserbench.SmallStruct, err e
 	v.Siblings = int(a.Siblings)
 	v.Spouse = a.Spouse
 	v.Money = a.Money
-	return
+	return v, 0, err //TODO
 }
 
 // func NewProtoModem() modem.ModemInterface[goserbench.SmallStruct] {
@@ -59,7 +59,7 @@ func (s *GogoProtoSerializer) Decode(bs []byte) (v goserbench.SmallStruct, err e
 // 	}
 // }
 
-func NewJSonTap() tap.TapInterface[goserbench.SmallStruct] {
+func NewJSonTap() tap.Interface[goserbench.SmallStruct] {
 	marshaller := &jsonpb.Marshaler{}
 	bufferPool := syncpool.NewBufferPool()
 

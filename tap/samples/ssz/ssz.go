@@ -85,11 +85,11 @@ func (s *SSZSerializer) Unmarshal(bs []byte, v *goserbench.SmallStruct) (err err
 	return
 }
 
-func NewModem() modem.ModemInterface[goserbench.SmallStruct] {
+func NewModem() modem.Interface[goserbench.SmallStruct] {
 	return &SSZSerializer{}
 }
 
-func NewTap() tap.TapInterface[goserbench.SmallStruct] {
+func NewTap() tap.Interface[goserbench.SmallStruct] {
 	modem := &SSZSerializer{}
 	return tap.NewTap[goserbench.SmallStruct, *SSZSerializer](modem)
 }

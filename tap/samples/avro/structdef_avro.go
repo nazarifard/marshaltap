@@ -51,7 +51,7 @@ var avroSchemaJSON = `
 		}
 	`
 
-func NewAvroATap() tap.TapInterface[goserbench.SmallStruct] {
+func NewAvroATap() tap.Interface[goserbench.SmallStruct] {
 	rec, err := goavro.NewRecord(goavro.RecordSchema(avroSchemaJSON))
 	if err != nil {
 		panic(err)
@@ -77,7 +77,7 @@ func (a *AvroA[V]) Encode(v goserbench.SmallStruct) (pool.Buffer, error) {
 	return zb, err
 }
 
-func (a *AvroA[V]) Decode(bs []byte) (v goserbench.SmallStruct, err error) {
+func (a *AvroA[V]) Decode(bs []byte) (v goserbench.SmallStruct, n int, err error) {
 	i, err := a.codec.Decode(bytes.NewReader(bs)) //(*pool.RBuffer)(buf))
 	if err != nil {
 		return
@@ -95,7 +95,7 @@ func (a *AvroA[V]) Decode(bs []byte) (v goserbench.SmallStruct, err error) {
 	v.Spouse = temp.(bool)
 	temp, _ = rec.Get("money")
 	v.Money = temp.(float64)
-	return
+	return v, 0, err //TODO
 }
 
 func (a *AvroA[V]) String() string {

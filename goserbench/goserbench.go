@@ -45,7 +45,7 @@ func generateSmallStruct() []*SmallStruct {
 }
 
 // BenchMarshalSmallStruct benchmarks marshalling the [SmallStruct] type.
-func BenchMarshalSmallStruct(b *testing.B, s tap.TapInterface[SmallStruct]) {
+func BenchMarshalSmallStruct(b *testing.B, s tap.Interface[SmallStruct]) {
 	b.Helper()
 	data := generateSmallStruct()
 
@@ -67,7 +67,7 @@ func BenchMarshalSmallStruct(b *testing.B, s tap.TapInterface[SmallStruct]) {
 // BenchUnmarshalSmallStruct benchmarks unmarshalling the [SmallStruct] type.
 // If validate is true, then the unmarshalled struct is verified to be correct
 // against the source struct.
-func BenchUnmarshalSmallStruct(b *testing.B, s tap.TapInterface[SmallStruct], validate bool) {
+func BenchUnmarshalSmallStruct(b *testing.B, s tap.Interface[SmallStruct], validate bool) {
 	b.Helper()
 
 	var timePrecision time.Duration
@@ -121,7 +121,7 @@ func BenchUnmarshalSmallStruct(b *testing.B, s tap.TapInterface[SmallStruct], va
 
 	for i := 0; i < b.N; i++ {
 		n := rand.Intn(len(ser))
-		v, err := s.Decode(ser[n].Bytes())
+		v, _, err := s.Decode(ser[n].Bytes())
 		if err != nil {
 			b.Fatalf("unmarshal error %s for %#x / %q", err, ser[n], ser[n])
 		}

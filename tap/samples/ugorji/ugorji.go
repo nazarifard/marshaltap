@@ -23,23 +23,23 @@ func (u *UgorjiCodecSerializer[V]) Sizeof(v V) int {
 	panic("UgorjiCodecSerializer.Sizeof method not implemented yet")
 }
 
-func NewMsgPackModem() modem.ModemInterface[goserbench.SmallStruct] {
+func NewMsgPackModem() modem.Interface[goserbench.SmallStruct] {
 	return &UgorjiCodecSerializer[goserbench.SmallStruct]{&codec.MsgpackHandle{}}
 }
 
-func NewModem() modem.ModemInterface[goserbench.SmallStruct] {
+func NewModem() modem.Interface[goserbench.SmallStruct] {
 	h := &codec.BincHandle{}
 	h.AsSymbols = 0
 	return &UgorjiCodecSerializer[goserbench.SmallStruct]{h}
 }
 
-func NewMsgPackTap() tap.TapInterface[goserbench.SmallStruct] {
+func NewMsgPackTap() tap.Interface[goserbench.SmallStruct] {
 	modem := NewMsgPackModem()
 	return tap.NewTap[goserbench.SmallStruct, *UgorjiCodecSerializer[goserbench.SmallStruct]](modem)
 	//{&codec.MsgpackHandle{}}
 }
 
-func NewTap() tap.TapInterface[goserbench.SmallStruct] {
+func NewTap() tap.Interface[goserbench.SmallStruct] {
 	modem := NewModem()
 	return tap.NewTap[goserbench.SmallStruct, *UgorjiCodecSerializer[goserbench.SmallStruct]](modem)
 	//{&codec.MsgpackHandle{}}

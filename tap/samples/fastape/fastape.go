@@ -83,11 +83,11 @@ func (cp smallStructTape) Unmarshal(bs []byte, p *goserbench.SmallStruct) (err e
 	return
 }
 
-func NewModem() modem.ModemInterface[goserbench.SmallStruct] {
+func NewModem() modem.Interface[goserbench.SmallStruct] {
 	return smallStructTape{}
 }
 
-func NewTap() tap.TapInterface[goserbench.SmallStruct] {
+func NewTap() tap.Interface[goserbench.SmallStruct] {
 	m := NewModem()
 	return tap.NewTap[goserbench.SmallStruct, smallStructTape](m)
 }

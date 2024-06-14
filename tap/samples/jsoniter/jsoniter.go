@@ -27,12 +27,12 @@ func (m *JsonIterSerializer[V]) Encode(v V) (syncpool.Buffer, error) {
 	return zb, err
 }
 
-func (m *JsonIterSerializer[V]) Decode(bs []byte) (v V, err error) {
+func (m *JsonIterSerializer[V]) Decode(bs []byte) (v V, n int, err error) {
 	err = jsoniter.NewDecoder(bytes.NewReader(bs)).Decode(&v)
-	return
+	return v, 0, err //TODO n should compute
 }
 
-func NewTap() tap.TapInterface[goserbench.SmallStruct] {
+func NewTap() tap.Interface[goserbench.SmallStruct] {
 	return &JsonIterSerializer[goserbench.SmallStruct]{
 		bufferPool: syncpool.NewBufferPool(),
 	}

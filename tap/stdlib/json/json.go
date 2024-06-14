@@ -21,12 +21,12 @@ func (m *JsonTap[V]) Encode(v V) (zb pool.Buffer, err error) {
 	return zb, err
 }
 
-func (m *JsonTap[V]) Decode(bs []byte) (v V, err error) {
+func (m *JsonTap[V]) Decode(bs []byte) (v V, n int, err error) {
 	err = json.Unmarshal(bs, &v)
-	return
+	return v, 0, err //TODO
 }
 
-func NewJsonTap[V any]() tap.TapInterface[V] {
+func NewJsonTap[V any]() tap.Interface[V] {
 	return &JsonTap[V]{
 		bufferPool: syncpool.NewBufferPool(),
 	}

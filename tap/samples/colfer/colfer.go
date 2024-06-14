@@ -57,11 +57,11 @@ func (s *ColferSerializer) Sizeof(v goserbench.SmallStruct) int {
 	n, _ := s.a.MarshalLen()
 	return n
 }
-func NewModem() modem.ModemInterface[goserbench.SmallStruct] {
+func NewModem() modem.Interface[goserbench.SmallStruct] {
 	return &ColferSerializer{}
 }
 
-func NewTap() tap.TapInterface[goserbench.SmallStruct] {
+func NewTap() tap.Interface[goserbench.SmallStruct] {
 	modem := NewModem()
 	return tap.NewTap[goserbench.SmallStruct, *ColferSerializer](modem)
 }

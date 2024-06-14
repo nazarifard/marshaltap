@@ -28,7 +28,7 @@ func (s *HproseSerializer) Encode(a goserbench.SmallStruct) (pool.Buffer, error)
 	return zb, err
 }
 
-func (s *HproseSerializer) Decode(bs []byte) (v goserbench.SmallStruct, err error) {
+func (s *HproseSerializer) Decode(bs []byte) (v goserbench.SmallStruct, n int, err error) {
 	o := &v
 	reader := hprose.NewReader(bytes.NewBuffer(bs), true)
 	o.Name, err = reader.ReadString()
@@ -52,10 +52,10 @@ func (s *HproseSerializer) Decode(bs []byte) (v goserbench.SmallStruct, err erro
 		return
 	}
 	o.Money, err = reader.ReadFloat64()
-	return
+	return v, 0, err //TODO
 }
 
-func NewTap() tap.TapInterface[goserbench.SmallStruct] {
+func NewTap() tap.Interface[goserbench.SmallStruct] {
 	return &HproseSerializer{
 		bufferPool: pool.NewBufferPool(),
 	}

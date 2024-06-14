@@ -38,7 +38,7 @@ func (s *FastJSONSerializer) Encode(v goserbench.SmallStruct) (buf syncpool.Buff
 	return zb, err
 }
 
-func (s *FastJSONSerializer) Decode(bs []byte) (v goserbench.SmallStruct, err error) {
+func (s *FastJSONSerializer) Decode(bs []byte) (v goserbench.SmallStruct, n int, err error) {
 	val, err := fastjson.ParseBytes(bs)
 	if err != nil {
 		return
@@ -49,10 +49,10 @@ func (s *FastJSONSerializer) Decode(bs []byte) (v goserbench.SmallStruct, err er
 	v.Siblings = val.GetInt("siblings")
 	v.Spouse = val.GetBool("spouse")
 	v.Money = val.GetFloat64("money")
-	return
+	return v, 0, err //TODO
 }
 
-func NewTap() tap.TapInterface[goserbench.SmallStruct] {
+func NewTap() tap.Interface[goserbench.SmallStruct] {
 	var arena fastjson.Arena
 	return &FastJSONSerializer{
 		object:     arena.NewObject(),

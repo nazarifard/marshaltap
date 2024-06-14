@@ -22,13 +22,13 @@ func (m *BinaryTap[V]) Encode(v V) (pool.Buffer, error) {
 	return zb, err
 }
 
-func (m *BinaryTap[V]) Decode(bs []byte) (v V, err error) {
+func (m *BinaryTap[V]) Decode(bs []byte) (v V, n int, err error) {
 	b2 := bytes.NewBuffer(bs)
 	err = binary.NewDecoder(b2).Decode(&v)
-	return
+	return v, len(bs) - b2.Len(), err
 }
 
-func NewTap[V any]() tap.TapInterface[V] {
+func NewTap[V any]() tap.Interface[V] {
 	return &BinaryTap[V]{
 		bufferPool: pool.NewBufferPool(),
 	}

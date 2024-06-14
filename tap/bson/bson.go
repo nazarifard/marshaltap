@@ -28,16 +28,16 @@ func (m *BsonTap[V]) Encode(v V) (buf pool.Buffer, err error) {
 	return
 }
 
-func (m *BsonTap[V]) Decode(bs []byte) (v V, err error) {
+func (m *BsonTap[V]) Decode(bs []byte) (v V, n int, err error) {
 	decoder, err := bson.NewDecoder(bsonrw.NewBSONDocumentReader(bs))
 	if err != nil {
 		return
 	}
 	err = decoder.Decode(&v)
-	return v, err
+	return v, 0, err //TODO n should compute
 }
 
-func NewTap() tap.TapInterface[goserbench.SmallStruct] {
+func NewTap() tap.Interface[goserbench.SmallStruct] {
 	return &BsonTap[goserbench.SmallStruct]{
 		bufferPool: pool.NewBufferPool(),
 	}

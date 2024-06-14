@@ -9,9 +9,9 @@ type UnMarshaler[V any] interface {
 type Sizeofer[V any] interface {
 	Sizeof(v V) int
 }
-type ModemInterface[V any] interface {
+type Interface[V any] interface {
 	Marshaler[V]
 	UnMarshaler[V]
 	Sizeofer[V]
 }
-type ModemGeneratorFn[V any] func() ModemInterface[V]
+type ModemGeneratorFn[V any] func() Interface[V]

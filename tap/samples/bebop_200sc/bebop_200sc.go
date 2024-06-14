@@ -59,11 +59,11 @@ func (s *Bebop200ScSerializer) ForceUTC() bool {
 	return true
 }
 
-func NewModem() modem.ModemInterface[goserbench.SmallStruct] {
+func NewModem() modem.Interface[goserbench.SmallStruct] {
 	return &Bebop200ScSerializer{}
 }
 
-func NewTap() tap.TapInterface[goserbench.SmallStruct] {
+func NewTap() tap.Interface[goserbench.SmallStruct] {
 	modem := NewModem()
 	return tap.NewTap[goserbench.SmallStruct, *Bebop200ScSerializer](modem)
 }

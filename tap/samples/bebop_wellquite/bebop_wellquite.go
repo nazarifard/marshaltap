@@ -48,11 +48,11 @@ func (s *BebopWellquiteSerializer) TimePrecision() time.Duration {
 	return 100 * time.Nanosecond
 }
 
-func NewModem() modem.ModemInterface[goserbench.SmallStruct] {
+func NewModem() modem.Interface[goserbench.SmallStruct] {
 	return &BebopWellquiteSerializer{}
 }
 
-func NewTap() tap.TapInterface[goserbench.SmallStruct] {
+func NewTap() tap.Interface[goserbench.SmallStruct] {
 	modem := NewModem()
 	return tap.NewTap[goserbench.SmallStruct, *BebopWellquiteSerializer](modem)
 }

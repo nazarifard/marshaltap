@@ -65,7 +65,7 @@ func (s BENCSerializer) Unmarshal(bs []byte, v *goserbench.SmallStruct) (err err
 	return
 }
 
-func NewModem() modem.ModemInterface[goserbench.SmallStruct] {
+func NewModem() modem.Interface[goserbench.SmallStruct] {
 	return BENCSerializer{}
 }
 
@@ -127,16 +127,16 @@ func (s BENCUnsafeSerializer) Unmarshal(bs []byte, v *goserbench.SmallStruct) (e
 	return
 }
 
-func NewUnsafeModem() modem.ModemInterface[goserbench.SmallStruct] {
+func NewUnsafeModem() modem.Interface[goserbench.SmallStruct] {
 	return BENCUnsafeSerializer{}
 }
 
-func NewTap() tap.TapInterface[goserbench.SmallStruct] {
+func NewTap() tap.Interface[goserbench.SmallStruct] {
 	modem := NewModem()
 	return tap.NewTap[goserbench.SmallStruct, BENCSerializer](modem)
 }
 
-func NewUnsafeTap() tap.TapInterface[goserbench.SmallStruct] {
+func NewUnsafeTap() tap.Interface[goserbench.SmallStruct] {
 	modem := NewUnsafeModem()
 	return tap.NewTap[goserbench.SmallStruct, BENCUnsafeSerializer](modem)
 }

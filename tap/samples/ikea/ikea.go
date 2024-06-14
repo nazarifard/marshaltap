@@ -41,7 +41,7 @@ func (s *IkeaSerializer) Encode(v goserbench.SmallStruct) (zb syncpool.Buffer, e
 	return
 }
 
-func (s *IkeaSerializer) Decode(bs []byte) (v goserbench.SmallStruct, err error) {
+func (s *IkeaSerializer) Decode(bs []byte) (v goserbench.SmallStruct, n int, err error) {
 	a := &s.a
 	err = ikea.Unpack(bytes.NewReader(bs), a)
 	if err != nil {
@@ -54,10 +54,10 @@ func (s *IkeaSerializer) Decode(bs []byte) (v goserbench.SmallStruct, err error)
 	v.Siblings = int(a.Siblings)
 	v.Spouse = a.Spouse
 	v.Money = math.Float64frombits(a.Money)
-	return
+	return v, 0, err //TODO
 }
 
-func NewTap() tap.TapInterface[goserbench.SmallStruct] {
+func NewTap() tap.Interface[goserbench.SmallStruct] {
 	return &IkeaSerializer{
 		bufferPool: syncpool.NewBufferPool(),
 	}

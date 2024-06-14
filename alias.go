@@ -6,4 +6,4 @@ import (
 )
 
 type S = goserbench.SmallStruct
-type MS = modem.ModemInterface[goserbench.SmallStruct]
+type MS = modem.Interface[goserbench.SmallStruct]

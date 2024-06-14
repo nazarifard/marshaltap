@@ -68,6 +68,6 @@ func NewModem() *BaselineModem[goserbench.SmallStruct] {
 	return &BaselineModem[goserbench.SmallStruct]{b: make([]byte, 47)}
 }
 
-func NewTap() tap.TapInterface[goserbench.SmallStruct] {
+func NewTap() tap.Interface[goserbench.SmallStruct] {
 	return tap.NewTap[goserbench.SmallStruct, *BaselineModem[goserbench.SmallStruct]](NewModem())
 }

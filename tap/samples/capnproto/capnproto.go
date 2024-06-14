@@ -29,7 +29,7 @@ func (x *CapNProtoSerializer) Encode(v goserbench.SmallStruct) (syncpool.Buffer,
 	return zb, err
 }
 
-func (x *CapNProtoSerializer) Decode(bs []byte) (v goserbench.SmallStruct, err error) {
+func (x *CapNProtoSerializer) Decode(bs []byte) (v goserbench.SmallStruct, n int, err error) {
 	s, _, err := capn.ReadFromMemoryZeroCopy(bs)
 	if err != nil {
 		return
@@ -41,10 +41,10 @@ func (x *CapNProtoSerializer) Decode(bs []byte) (v goserbench.SmallStruct, err e
 	v.Siblings = int(o.Siblings())
 	v.Spouse = o.Spouse()
 	v.Money = o.Money()
-	return
+	return v, 0, err //TODO
 }
 
-func NewTap() tap.TapInterface[goserbench.SmallStruct] {
+func NewTap() tap.Interface[goserbench.SmallStruct] {
 	return &CapNProtoSerializer{
 		bufferPool: syncpool.NewBufferPool(),
 	}

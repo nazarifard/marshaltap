@@ -37,7 +37,7 @@ func (s *FlatBufferSerializer) Encode(v goserbench.SmallStruct) (buffer syncpool
 	return
 }
 
-func (s *FlatBufferSerializer) Decode(bs []byte) (v goserbench.SmallStruct, err error) {
+func (s *FlatBufferSerializer) Decode(bs []byte) (v goserbench.SmallStruct, n int, err error) {
 	o := FlatBufferA{}
 	o.Init(bs, flatbuffers.GetUOffsetT(bs))
 	v.Name = string(o.Name())
@@ -46,10 +46,10 @@ func (s *FlatBufferSerializer) Decode(bs []byte) (v goserbench.SmallStruct, err 
 	v.Siblings = int(o.Siblings())
 	v.Spouse = o.Spouse()
 	v.Money = o.Money()
-	return
+	return v, 0, err //TODO
 }
 
-func NewTap() tap.TapInterface[goserbench.SmallStruct] {
+func NewTap() tap.Interface[goserbench.SmallStruct] {
 	return &FlatBufferSerializer{
 		builder:    flatbuffers.NewBuilder(0),
 		bufferPool: syncpool.NewBufferPool(),

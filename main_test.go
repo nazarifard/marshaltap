@@ -54,7 +54,7 @@ type BenchmarkCase struct {
 	Name string
 	URL  string
 	//New  func() goserbench.Serializer
-	New func() tap.TapInterface[goserbench.SmallStruct]
+	New func() tap.Interface[goserbench.SmallStruct]
 }
 
 var benchmarkCases = []BenchmarkCase{
