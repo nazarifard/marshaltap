@@ -69,5 +69,5 @@ func NewModem() *BaselineModem[goserbench.SmallStruct] {
 }
 
 func NewTap() tap.Interface[goserbench.SmallStruct] {
-	return tap.NewTap[goserbench.SmallStruct, *BaselineModem[goserbench.SmallStruct]](NewModem())
+	return tap.NewTap(NewModem())
 }

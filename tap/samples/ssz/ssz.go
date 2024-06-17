@@ -91,5 +91,5 @@ func NewModem() modem.Interface[goserbench.SmallStruct] {
 
 func NewTap() tap.Interface[goserbench.SmallStruct] {
 	modem := &SSZSerializer{}
-	return tap.NewTap[goserbench.SmallStruct, *SSZSerializer](modem)
+	return tap.NewTap(modem)
 }

@@ -8,6 +8,7 @@ import (
 type Encoder[V any] interface {
 	Encode(V) (pool.Buffer, error)
 }
+
 type Decoder[V any] interface {
 	Decode(bs []byte) (v V, n int, err error)
 }
@@ -33,8 +34,8 @@ func (t Tap[V, M]) Decode(bs []byte) (v V, n int, err error) {
 	return v, t.Modem.Sizeof(v), err
 }
 
-func NewTap[V any, M modem.Interface[V]](modem modem.Interface[V]) Tap[V, M] {
-	return Tap[V, M]{
-		Modem: modem,
+func NewTap[V any](m modem.Interface[V]) Tap[V, modem.Interface[V]] {
+	return Tap[V, modem.Interface[V]]{
+		Modem: m,
 	}
 }

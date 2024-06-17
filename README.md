@@ -83,6 +83,7 @@ Also some of other results show how MarshalTap can reduce memory allocations eve
 	"github.com/nazarifard/fastape"
 	"github.com/nazarifard/marshaltap/modem"
 	"github.com/nazarifard/marshaltap/tap"
+	marshal "github.com/nazarifard/marshaltap"	
  )
 
  type S string
@@ -90,27 +91,26 @@ Also some of other results show how MarshalTap can reduce memory allocations eve
  type SModem struct { 
       S fastape.StringTape 
  }
- func (m *SModem) Sizeof(s S) int {
+ func (m SModem) Sizeof(s S) int {
  	return m.S.Sizeof(s)
  }
- func (m *SModem) Marshal(s S, buf []byte) error {
+ func (m SModem) Marshal(s S, buf []byte) error {
  	_, err := m.S.Marshal(s, buf)
  	return err
  }
- func (m *SModem) Unmarshal(bs []byte, s S) error {
+ func (m SModem) Unmarshal(bs []byte, s S) error {
  	_, err = m.S.Unmarshal(bs, &s)
  	return
  }
  
  func main() {
- 	s:="hello"
- 	stap:=tap.NewTap[S, *SModem](s)	
+ 	stap:=tap.NewTap(Smodem{})	
 
- 	buf, _ := stap.Encode(s)           //get buf
- 	s2,_,_ := stap.Decode(buf.Bytes()) //use buf
- 	buf.Free()                         //free buf	
+ 	buf, _ := stap.Encode("hello")           //get buf
+ 	hello,_,_ := stap.Decode(buf.Bytes())    //use buf
+ 	buf.Free()                               //free buf	
 	
- 	print(s2)
+ 	print(hello)
  }
 ```
 ## license

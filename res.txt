@@ -1,0 +1,58 @@
+BenchmarkSerializers/marshal/msgp-4              7317786               165.0 ns/op             113.0 B/serial          0 B/op          0 allocs/op
+BenchmarkSerializers/unmarshal/msgp-4            3154424               371.4 ns/op           112 B/op          3 allocs/op
+BenchmarkSerializers/marshal/json-4               578253              1779 ns/op               151.7 B/serial        288 B/op          3 allocs/op
+BenchmarkSerializers/unmarshal/json-4             285049              3818 ns/op             328 B/op          7 allocs/op
+BenchmarkSerializers/marshal/jsoniter-4           664524              1595 ns/op               152.8 B/serial        744 B/op          5 allocs/op
+BenchmarkSerializers/unmarshal/jsoniter-4         366054              2899 ns/op            1023 B/op         17 allocs/op
+BenchmarkSerializers/marshal/easyjson-4          1518220               775.8 ns/op             151.8 B/serial         48 B/op          1 allocs/op
+BenchmarkSerializers/unmarshal/easyjson-4        1000000              1039 ns/op              32 B/op          2 allocs/op
+BenchmarkSerializers/marshal/bson-4               437755              2745 ns/op               110.0 B/serial        616 B/op          8 allocs/op
+BenchmarkSerializers/unmarshal/bson-4             433412              2441 ns/op             408 B/op         15 allocs/op
+BenchmarkSerializers/marshal/mongobson-4          390430              2795 ns/op               110.0 B/serial        616 B/op          8 allocs/op
+BenchmarkSerializers/unmarshal/mongobson-4        413648              2497 ns/op             408 B/op         15 allocs/op
+BenchmarkSerializers/marshal/gob-4                160948              6938 ns/op               172.5 B/serial       1464 B/op         34 allocs/op
+BenchmarkSerializers/unmarshal/gob-4               31574             38009 ns/op            7737 B/op        204 allocs/op
+BenchmarkSerializers/marshal/alecthomas/binary-4                  610143              1979 ns/op                61.00 B/serial       320 B/op           21 allocs/op
+BenchmarkSerializers/unmarshal/alecthomas/binary-4                580639              2052 ns/op             344 B/op         21 allocs/op
+BenchmarkSerializers/marshal/flatbuffers-4                       2942970               408.0 ns/op              95.29 B/serial         0 B/op            0 allocs/op
+BenchmarkSerializers/unmarshal/flatbuffers-4                     4457146               267.8 ns/op            32 B/op          2 allocs/op
+BenchmarkSerializers/marshal/capnproto-4                          389449              3530 ns/op                96.00 B/serial      4154 B/op            3 allocs/op
+BenchmarkSerializers/unmarshal/capnproto-4                       2021446               619.5 ns/op           112 B/op          5 allocs/op
+BenchmarkSerializers/marshal/hprose-4                             913212              1350 ns/op                85.25 B/serial       287 B/op           10 allocs/op
+BenchmarkSerializers/unmarshal/hprose-4                           687931              1528 ns/op             256 B/op         10 allocs/op
+BenchmarkSerializers/marshal/hprose2-4                           1303082               903.3 ns/op              85.27 B/serial       128 B/op            1 allocs/op
+BenchmarkSerializers/unmarshal/hprose2-4                         1417456               870.0 ns/op           184 B/op          4 allocs/op
+BenchmarkSerializers/marshal/gogo/jsonpb-4                         71065             15728 ns/op               125.7 B/serial       2833 B/op           81 allocs/op
+BenchmarkSerializers/unmarshal/gogo/jsonpb-4                       59390             20621 ns/op            3242 B/op         56 allocs/op
+BenchmarkSerializers/marshal/colfer-4                            6280502               187.0 ns/op              51.09 B/serial         0 B/op            0 allocs/op
+BenchmarkSerializers/unmarshal/colfer-4                          3031437               389.6 ns/op           112 B/op          3 allocs/op
+BenchmarkSerializers/marshal/gencode-4                           3887442               273.5 ns/op              53.00 B/serial        16 B/op            1 allocs/op
+BenchmarkSerializers/unmarshal/gencode-4                         3764502               313.1 ns/op            80 B/op          1 allocs/op
+BenchmarkSerializers/marshal/gencode/unsafe-4                    7087771               164.0 ns/op              46.00 B/serial         0 B/op            0 allocs/op
+BenchmarkSerializers/unmarshal/gencode/unsafe-4                  3225619               342.4 ns/op           112 B/op          3 allocs/op
+BenchmarkSerializers/marshal/calmh/xdr-4                         5507778               221.6 ns/op              60.00 B/serial         0 B/op            0 allocs/op
+BenchmarkSerializers/unmarshal/calmh/xdr-4                       3051442               391.8 ns/op           112 B/op          3 allocs/op
+BenchmarkSerializers/marshal/goavro-4                             395449              2810 ns/op                47.00 B/serial       536 B/op           22 allocs/op
+BenchmarkSerializers/unmarshal/goavro-4                           150789              7642 ns/op            2232 B/op         52 allocs/op
+BenchmarkSerializers/marshal/ikea-4                              1292906               932.5 ns/op              55.00 B/serial       136 B/op            9 allocs/op
+BenchmarkSerializers/unmarshal/ikea-4                             899934              1200 ns/op             208 B/op         12 allocs/op
+BenchmarkSerializers/marshal/ssz-4                                  6211            183801 ns/op               418.0 B/serial      15128 B/op         1890 allocs/op
+BenchmarkSerializers/unmarshal/ssz-4                                6168            191620 ns/op           15595 B/op       1888 allocs/op
+BenchmarkSerializers/marshal/200sc/bebop-4                       7345836               155.4 ns/op              55.00 B/serial         0 B/op            0 allocs/op
+BenchmarkSerializers/unmarshal/200sc/bebop-4                     3331846               345.7 ns/op           112 B/op          3 allocs/op
+BenchmarkSerializers/marshal/wellquite/bebop-4                   7184989               158.0 ns/op              55.00 B/serial         0 B/op            0 allocs/op
+BenchmarkSerializers/unmarshal/wellquite/bebop-4                 3345606               353.5 ns/op           111 B/op          2 allocs/op
+BenchmarkSerializers/marshal/fastjson-4                           488985              2499 ns/op               133.8 B/serial       1360 B/op            7 allocs/op
+BenchmarkSerializers/unmarshal/fastjson-4                         302908              3780 ns/op            1800 B/op         11 allocs/op
+BenchmarkSerializers/marshal/benc-4                              8034052               145.8 ns/op              51.00 B/serial         0 B/op            0 allocs/op
+BenchmarkSerializers/unmarshal/benc-4                            3513165               343.1 ns/op           112 B/op          3 allocs/op
+BenchmarkSerializers/marshal/benc/usafe-4                        8062218               145.0 ns/op              51.00 B/serial         0 B/op            0 allocs/op
+BenchmarkSerializers/unmarshal/benc/usafe-4                      5151064               227.8 ns/op            80 B/op          1 allocs/op
+BenchmarkSerializers/marshal/mus-4                               6671806               171.1 ns/op              46.00 B/serial         0 B/op            0 allocs/op
+BenchmarkSerializers/unmarshal/mus-4                             2950593               402.8 ns/op           112 B/op          3 allocs/op
+BenchmarkSerializers/marshal/mus/unsafe-4                        6885499               171.5 ns/op              46.00 B/serial         0 B/op            0 allocs/op
+BenchmarkSerializers/unmarshal/mus/unsafe-4                      2944018               399.1 ns/op           112 B/op          3 allocs/op
+BenchmarkSerializers/marshal/baseline-4                          8277904               140.9 ns/op              47.00 B/serial         0 B/op            0 allocs/op
+BenchmarkSerializers/unmarshal/baseline-4                        5537110               214.6 ns/op            80 B/op          1 allocs/op
+BenchmarkSerializers/marshal/fastape-4                           6394965               184.5 ns/op              55.00 B/serial         0 B/op            0 allocs/op
+BenchmarkSerializers/unmarshal/fastape-4                         4633261               255.7 ns/op            80 B/op          1 allocs/op

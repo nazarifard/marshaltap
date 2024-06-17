@@ -78,7 +78,7 @@ func NewModem() modem.Interface[goserbench.SmallStruct] {
 
 func NewTap() tap.Interface[goserbench.SmallStruct] {
 	modem := NewModem()
-	return tap.NewTap[goserbench.SmallStruct, MUSSerializer](modem)
+	return tap.NewTap(modem)
 }
 
 type MUSUnsafeSerializer struct{}
@@ -146,5 +146,5 @@ func NewUnsafeModem() modem.Interface[goserbench.SmallStruct] {
 
 func NewUnsafeTap() tap.Interface[goserbench.SmallStruct] {
 	modem := NewUnsafeModem()
-	return tap.NewTap[goserbench.SmallStruct, MUSUnsafeSerializer](modem)
+	return tap.NewTap(modem)
 }

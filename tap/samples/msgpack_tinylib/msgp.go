@@ -54,5 +54,5 @@ func NewModem() modem.Interface[goserbench.SmallStruct] {
 }
 func NewTap() tap.Interface[goserbench.SmallStruct] {
 	modem := NewModem()
-	return tap.NewTap[goserbench.SmallStruct, *MsgpSerializer](modem)
+	return tap.NewTap(modem)
 }

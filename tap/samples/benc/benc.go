@@ -133,10 +133,10 @@ func NewUnsafeModem() modem.Interface[goserbench.SmallStruct] {
 
 func NewTap() tap.Interface[goserbench.SmallStruct] {
 	modem := NewModem()
-	return tap.NewTap[goserbench.SmallStruct, BENCSerializer](modem)
+	return tap.NewTap(modem)
 }
 
 func NewUnsafeTap() tap.Interface[goserbench.SmallStruct] {
 	modem := NewUnsafeModem()
-	return tap.NewTap[goserbench.SmallStruct, BENCUnsafeSerializer](modem)
+	return tap.NewTap(modem)
 }

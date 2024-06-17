@@ -1,4 +1,4 @@
-package marshaltap
+package marshal
 
 import (
 	"testing"
@@ -20,7 +20,7 @@ func TestTape(t *testing.T) {
 		Money:    0.1234567890,
 	}
 	sModem := fastape.NewModem()
-	sTap := tap.NewTap[S, MS](sModem)
+	sTap := tap.NewTap(sModem)
 	buff, err := sTap.Encode(s)
 	//assert.Error(t, err, "tape.Encoder failed")
 	s2, _, err := sTap.Decode(buff.Bytes())
@@ -41,7 +41,7 @@ func BenchmarkFastape_MarshalTap(b *testing.B) {
 		Money:    0.1234567890,
 	}
 	sModem := fastape.NewModem()
-	sTap := tap.NewTap[S, MS](sModem)
+	sTap := tap.NewTap(sModem)
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		buff, err := sTap.Encode(s)

@@ -35,12 +35,11 @@ func NewModem() modem.Interface[goserbench.SmallStruct] {
 
 func NewMsgPackTap() tap.Interface[goserbench.SmallStruct] {
 	modem := NewMsgPackModem()
-	return tap.NewTap[goserbench.SmallStruct, *UgorjiCodecSerializer[goserbench.SmallStruct]](modem)
+	return tap.NewTap(modem)
 	//{&codec.MsgpackHandle{}}
 }
 
 func NewTap() tap.Interface[goserbench.SmallStruct] {
 	modem := NewModem()
-	return tap.NewTap[goserbench.SmallStruct, *UgorjiCodecSerializer[goserbench.SmallStruct]](modem)
-	//{&codec.MsgpackHandle{}}
+	return tap.NewTap(modem) //{&codec.MsgpackHandle{}}
 }

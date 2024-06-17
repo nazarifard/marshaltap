@@ -57,7 +57,7 @@ func NewModem() modem.Interface[goserbench.SmallStruct] {
 }
 func NewTap() tap.Interface[goserbench.SmallStruct] {
 	modem := NewModem()
-	return tap.NewTap[goserbench.SmallStruct, *GencodeSerializer](modem)
+	return tap.NewTap(modem)
 }
 
 type GencodeUnsafeSerializer struct {
@@ -108,5 +108,5 @@ func NewUnsafeModem() modem.Interface[goserbench.SmallStruct] {
 }
 func NewTapUnsafe() tap.Interface[goserbench.SmallStruct] {
 	modem := NewUnsafeModem()
-	return tap.NewTap[goserbench.SmallStruct, *GencodeUnsafeSerializer](modem)
+	return tap.NewTap(modem)
 }

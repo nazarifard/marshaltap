@@ -1,4 +1,4 @@
-package marshaltap
+package marshal
 
 import (
 	"github.com/nazarifard/marshaltap/goserbench"

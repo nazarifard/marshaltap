@@ -8,12 +8,14 @@ import (
 	pool "github.com/nazarifard/syncpool"
 )
 
+var bufferPool = pool.NewBufferPool()
+
 type GobTap[V any] struct {
-	bufferPool pool.BufferPool
+	//	bufferPool pool.BufferPool
 }
 
 func (m GobTap[V]) Encode(v V) (pool.Buffer, error) {
-	zb := m.bufferPool.Get(0)
+	zb := bufferPool.Get(0)
 	zb.Reset()
 	err := gob.NewEncoder(zb).Encode(v)
 	if err != nil {
@@ -30,6 +32,6 @@ func (m GobTap[V]) Decode(bs []byte) (v V, n int, err error) {
 
 func NewGobTap[V any]() tap.Interface[V] {
 	return GobTap[V]{
-		bufferPool: pool.NewBufferPool(),
+		//	bufferPool: pool.NewBufferPool(),
 	}
 }
