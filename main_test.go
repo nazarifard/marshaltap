@@ -1,7 +1,6 @@
 package marshal
 
 import (
-	"fmt"
 	"os"
 	"testing"
 
@@ -42,14 +41,6 @@ var (
 	validate = os.Getenv("VALIDATE") != ""
 )
 
-func TestMessage(t *testing.T) {
-	fmt.Print(`A test suite for benchmarking various Go serialization methods.
-
-See README.md for details on running the benchmarks.
-
-`)
-}
-
 type BenchmarkCase struct {
 	Name string
 	URL  string
@@ -59,6 +50,10 @@ type BenchmarkCase struct {
 
 var benchmarkCases = []BenchmarkCase{
 	{
+		Name: "fastape",
+		URL:  "github.com/nazarifard/fastape",
+		New:  fastape.NewTap,
+	}, {
 		// 	Name: "gotiny",
 		// 	URL:  "github.com/niubaoshu/gotiny",
 		// 	New:  gotiny.,
@@ -230,10 +225,6 @@ var benchmarkCases = []BenchmarkCase{
 		Name: "baseline",
 		URL:  "",
 		New:  baseline.NewTap,
-	}, {
-		Name: "fastape",
-		URL:  "github.com/nazarifard/fastape",
-		New:  fastape.NewTap,
 	},
 }
 

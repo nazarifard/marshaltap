@@ -8,7 +8,7 @@
  MarshalTap is a tap module that can be installed before a data serializer module for reduction of memory allocations.
  Zero memory allocation is always a ideal case and the following tables shows how Marshal-Tap prevented extra memory allocation successfully. 
 
- MarshalTap is a general module and can be used with of any availiable data serializer module.
+ MarshalTap is a general module and can be used with any availiable data serializer module as well as it can work as a switch between two different serializer engine for data conversion.
  Each data serializer module that can provide an interface with 3 methods, it can connected to marshaltap easily.
  Firstly MarshalTap is designed for Fastape high performance data serializer but it designed to work with any arbitrary marshaller.
  Each data serializer is known a modem and any modem interface should provide these methods:
@@ -41,20 +41,24 @@
 Also some of other results show how MarshalTap can reduce memory allocations even for best and fast serializers. The following tables show results of marshallers with and without MarshalTap.
 ```sh
 ## With MarshalTap
-.───┬──────────────────┬─────────┬───────┬──────┬───────────.
-│ # │       name       │    #    │ ns/op │ B/op │ allocs/op │
-├───┼──────────────────┼─────────┼───────┼──────┼───────────┤
-│ 0 │ benc/usafe-4     │ 8546756 │ 136.7 │ 0    │ 0         │
-│ 1 │ benc-4           │ 7955727 │ 146.0 │ 0    │ 0         │
-│ 2 │ gencode/unsafe-4 │ 6888806 │ 160.5 │ 0    │ 0         │
-│ 3 │ msgp-4           │ 6804525 │ 166.9 │ 0    │ 0         │
-│ 4 │ mus/unsafe-4     │ 7116132 │ 167.1 │ 0    │ 0         │
-│ 5 │ mus-4            │ 7163511 │ 167.9 │ 0    │ 0         │
-│ 6 │ fastape-4        │ 6420730 │ 184.6 │ 0    │ 0         │
-│ 7 │ colfer-4         │ 6094623 │ 185.7 │ 0    │ 0         │
-│ 8 │ calmh/xdr-4      │ 5549302 │ 213.0 │ 0    │ 0         │
-│ 9 │ flatbuffers-4    │ 2899107 │ 411.6 │ 0    │ 0         │
-'───┴──────────────────┴─────────┴───────┴──────┴───────────'
+╭────┬───────────────────┬──────┬───────┬─────────────────┬──────┬───────────╮
+│  # │       name        │  #   │ ns/op │ Marshalled_Size │ B/op │ allocs/op │
+├────┼───────────────────┼──────┼───────┼─────────────────┼──────┼───────────┤
+│  0 │ fastape-4         │ 9601 │ 165.3 │ 46.00           │ 0    │ 0         │
+│  1 │ gencode/unsafe-4  │ 8631 │ 138.1 │ 46.00           │ 0    │ 0         │
+│  2 │ mus-4             │ 7964 │ 149.8 │ 46.00           │ 0    │ 0         │
+│  3 │ mus/unsafe-4      │ 6410 │ 250.0 │ 46.00           │ 0    │ 0         │
+│  4 │ baseline-4        │ 5341 │ 216.9 │ 47.00           │ 0    │ 0         │
+│  5 │ benc-4            │ 9993 │ 121.9 │ 51.00           │ 0    │ 0         │
+│  6 │ benc/usafe-4      │ 9116 │ 122.2 │ 51.00           │ 0    │ 0         │
+│  7 │ colfer-4          │ 8018 │ 153.5 │ 51.14           │ 0    │ 0         │
+│  8 │ 200sc/bebop-4     │ 9074 │ 125.3 │ 55.00           │ 0    │ 0         │
+│  9 │ wellquite/bebop-4 │ 8857 │ 129.8 │ 55.00           │ 0    │ 0         │
+│ 10 │ calmh/xdr-4       │ 6426 │ 186.4 │ 60.00           │ 0    │ 0         │
+│ 11 │ flatbuffers-4     │ 3010 │ 351.1 │ 95.17           │ 0    │ 0         │
+│ 12 │ msgp-4            │ 7084 │ 174.0 │ 113.0           │ 0    │ 0         │
+│ 13 │ easyjson-4        │ 1401 │ 874.7 │ 151.8           │ 50   │ 1         │
+╰────┴───────────────────┴──────┴───────┴─────────────────┴──────┴───────────╯
 
 ## Without MarshalTap
 .───┬──────────────────┬─────────┬───────┬──────┬───────────.

@@ -6,7 +6,7 @@ import (
 
 	"github.com/nazarifard/marshaltap/tap"
 	"github.com/nazarifard/marshaltap/tap/samples/fastape"
-	"github.com/nazarifard/syncpool"
+	//"github.com/nazarifard/syncpool"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -84,22 +84,3 @@ func BenchmarkFastape(b *testing.B) {
 	}
 }
 
-func f() []byte {
-	b := syncpool.ByteSlicePool.Get(100)
-	b[0] = 0
-	b[2] = 2
-	b[30] = 30
-	//out := append(([]byte)(nil), b...)
-	out := make([]byte, 100)
-	syncpool.ByteSlicePool.Put(b)
-	return out
-}
-func BenchmarkABC(b *testing.B) {
-	var bs []byte
-	for i := range b.N {
-		bs = f()
-		_ = bs
-		_ = i
-	}
-	//print(bs)
-}
