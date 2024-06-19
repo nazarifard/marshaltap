@@ -77,6 +77,8 @@ github.com/nazarifard/fastape v0.0.0-20240611084216-abaecf150e5b h1:Roh7HBLqAxLp
 github.com/nazarifard/fastape v0.0.0-20240611084216-abaecf150e5b/go.mod h1:F54tpGg4uMgsYNUqD07iNENNGcS2GJobr+td/iZ5Xm4=
 github.com/nazarifard/fastape v0.0.0-20240618210653-607305a3ae51 h1:QocQlmZXhuz9I8TOqe+df2kDqq5HWeWWwZnT0uVNUxw=
 github.com/nazarifard/fastape v0.0.0-20240618210653-607305a3ae51/go.mod h1:F54tpGg4uMgsYNUqD07iNENNGcS2GJobr+td/iZ5Xm4=
+github.com/nazarifard/fastape v0.0.0-20240619065030-5209d0a13d61 h1:5hbjbyr1b/mnx2AlhoH4rUYpW76NUjJ49dpIgsAooQE=
+github.com/nazarifard/fastape v0.0.0-20240619065030-5209d0a13d61/go.mod h1:F54tpGg4uMgsYNUqD07iNENNGcS2GJobr+td/iZ5Xm4=
 github.com/nazarifard/syncpool v0.0.0-20240611132549-bcb110edddc8 h1:Tnj8GrLD8Ei0nlPG7I01YM/ltmFTHpRwt76sgK1RHCY=
 github.com/nazarifard/syncpool v0.0.0-20240611132549-bcb110edddc8/go.mod h1:6jsXD5qqHuYLJE+iVr7ICvzFD5pm7P1un7V5QmJi9o8=
 github.com/philhofer/fwd v1.1.2 h1:bnDivRJ1EWPjUIRXV5KfORO897HTbpFAQddBdE8t7Gw=

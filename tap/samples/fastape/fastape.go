@@ -1,6 +1,8 @@
 package fastape
 
 import (
+	"time"
+
 	"github.com/nazarifard/fastape"
 	"github.com/nazarifard/marshaltap/goserbench"
 	"github.com/nazarifard/marshaltap/modem"
@@ -9,7 +11,7 @@ import (
 
 type smallStructTape struct {
 	NameTape     fastape.StringTape
-	BirthDayTape fastape.TimeTape
+	BirthDayTape fastape.UnitTape[int64]
 	PhoneTape    fastape.StringTape
 	SiblingsTape fastape.UnitTape[byte]
 	SpouseTape   fastape.UnitTape[bool]
@@ -18,7 +20,7 @@ type smallStructTape struct {
 
 func (cp *smallStructTape) Sizeof(p goserbench.SmallStruct) int {
 	return cp.NameTape.Sizeof(p.Name) +
-		cp.BirthDayTape.Sizeof(p.BirthDay) +
+		cp.BirthDayTape.Sizeof(p.BirthDay.UnixNano()) +
 		cp.PhoneTape.Sizeof(p.Phone) +
 		cp.SiblingsTape.Sizeof(byte(p.Siblings)) +
 		cp.SpouseTape.Sizeof(p.Spouse) +
@@ -29,7 +31,7 @@ func (cp *smallStructTape) Marshal(p goserbench.SmallStruct, buf []byte) (err er
 	k, n := 0, 0
 	k, _ = cp.NameTape.Roll(p.Name, buf[n:])
 	n += k
-	k, _ = cp.BirthDayTape.Roll(p.BirthDay, buf[n:])
+	k, _ = cp.BirthDayTape.Roll(p.BirthDay.UnixNano(), buf[n:])
 	n += k
 	k, _ = cp.PhoneTape.Roll(p.Phone, buf[n:])
 	n += k
@@ -50,7 +52,9 @@ func (cp *smallStructTape) Unmarshal(bs []byte, p *goserbench.SmallStruct) (err 
 		return err
 	}
 
-	k, err = cp.BirthDayTape.Unroll(bs[n:], &p.BirthDay)
+	var nano int64
+	k, err = cp.BirthDayTape.Unroll(bs[n:], &nano)
+	p.BirthDay = time.Unix(0, nano)
 	n += k
 	if err != nil {
 		return err

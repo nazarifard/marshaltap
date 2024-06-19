@@ -15,7 +15,7 @@ require (
 	github.com/json-iterator/go v1.1.12
 	github.com/linkedin/goavro v1.0.5
 	github.com/mailru/easyjson v0.7.7
-	github.com/nazarifard/fastape v0.0.0-20240618210653-607305a3ae51
+	github.com/nazarifard/fastape v0.0.0-20240619065030-5209d0a13d61
 	github.com/prysmaticlabs/go-ssz v0.0.0-20190827151743-72881c4223d8
 	github.com/shamaton/msgpackgen v0.3.0
 	github.com/tinylib/msgp v1.1.8
