@@ -1,8 +1,0 @@
-struct BebopBuf200sc {
-  string name;
-  date birthDay;
-  string phone;
-  int32 siblings;
-  bool spouse;
-  float64 money;
-}

@@ -1,8 +1,0 @@
-struct GencodeUnsafeA {
-    Name     string
-    BirthDay int64
-    Phone    string
-    Siblings vint32
-    Spouse   bool
-    Money    float64
-}

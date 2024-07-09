@@ -1,4 +1,4 @@
-package modem
+package marshal
 
 type Marshaler[V any] interface {
 	Marshal(v V, buf []byte) (err error)
@@ -9,9 +9,10 @@ type UnMarshaler[V any] interface {
 type Sizeofer[V any] interface {
 	Sizeof(v V) int
 }
-type Interface[V any] interface {
+type Modem[V any] interface {
 	Marshaler[V]
 	UnMarshaler[V]
 	Sizeofer[V]
 }
-type ModemGeneratorFn[V any] func() Interface[V]
+
+//type ModemGeneratorFn[V any] func() Modem[V]

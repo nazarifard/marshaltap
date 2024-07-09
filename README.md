@@ -1,12 +1,12 @@
 ## MarshalTap
- Whenever we have to load and marshal an amount of huge stream data memory management is a challemge.
+ Whenever we have to load and marshal an amount of huge stream data, memory management is a challenge.
  Frequently memory allocation for data marashaling forces unnecessary load to GC and finally it causes low performance and even crash in some cases.
  MarshalTap is designed to prevent unnecessary memory allocation during marshal and or unmarshal data process.
  We should try to have Zero memory allocation per each Encoding or Decoding oprand. 
  Usually even best designed data serializers causes at leat one memory allocating per oprand. if you have to handle a big bandwith of real time data, should be care about memory allocation always.
  
  MarshalTap is a tap module that can be installed before a data serializer module for reduction of memory allocations.
- Zero memory allocation is always a ideal case and the following tables shows how Marshal-Tap prevented extra memory allocation successfully. 
+ Zero memory allocation is always an ideal case and the following tables shows how Marshal-Tap prevented extra memory allocation successfully. 
 
  MarshalTap is a general module and can be used with any availiable data serializer module as well as it can work as a switch between two different serializer engine for data conversion.
  Each data serializer module that can provide an interface with 3 methods, it can connected to marshaltap easily.
@@ -79,7 +79,7 @@ Also some of other results show how MarshalTap can reduce memory allocations eve
 
 ## Current status
   currently masrhaltap is tested with some of serializers that is used by [goserbench](https://github.com/alecthomas/go_serialization_benchmarks) project.
-  but they are not provides all 3 required method easily, then I cant support them yet. 
+  but they are not provides all 3 required method easily, then I can't support all of them yet. 
   
 ## Usage
  ```go
@@ -91,30 +91,13 @@ Also some of other results show how MarshalTap can reduce memory allocations eve
  )
 
  type S string
- 
- type SModem struct { 
-      S fastape.StringTape 
- }
- func (m SModem) Sizeof(s S) int {
- 	return m.S.Sizeof(s)
- }
- func (m SModem) Marshal(s S, buf []byte) error {
- 	_, err := m.S.Marshal(s, buf)
- 	return err
- }
- func (m SModem) Unmarshal(bs []byte, s S) error {
- 	_, err = m.S.Unmarshal(bs, &s)
- 	return
- }
- 
  func main() {
- 	stap:=tap.NewTap(Smodem{})	
-
+ 	stap:=tap.NewGobTap[S](syncpool.Pool[S])
  	buf, _ := stap.Encode("hello")           //get buf
  	hello,_,_ := stap.Decode(buf.Bytes())    //use buf
  	buf.Free()                               //free buf	
-	
- 	print(hello)
+	print(hello)                             //use hello
+	stap.Free(hello)                         //free hello
  }
 ```
 ## license

@@ -1,8 +1,0 @@
-struct GencodeA {
-    Name     string
-    BirthDay time
-    Phone    string
-    Siblings vint32
-    Spouse   bool
-    Money    float64
-}
